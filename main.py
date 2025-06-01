@@ -7,6 +7,11 @@ def point_to_line_distance(a, b, p):
     # Відстань від точки p до прямої через a, b
     return np.abs(np.cross(b - a, a - p)) / np.linalg.norm(b - a)
 
+def random_convex_polygon(N=8, size=10):
+    points = np.random.rand(N, 2) * size
+    hull = ConvexHull(points)
+    return points[hull.vertices]
+
 def min_distance_to_polygon(polygon, point):
     # Мінімальна відстань до будь-якої сторони полігона
     n = len(polygon)
@@ -62,22 +67,14 @@ def plot_polygon_with_circle(polygon, center, radius):
     plt.show()
 
 # ==== ТЕСТ ====
-polygon = np.array([
-    [1, 4],
-    [2, 3],
-    [3, 2],
-    [4, 4],
-    [5, 1],
-    [6, 4],
-    [7, 2],
-    [9, 1],
-    [10, 2]
-])
+N = np.random.randint(6, 13)
+polygon = random_convex_polygon(N=N, size=10)
 
 hull = ConvexHull(polygon)
 polygon = polygon[hull.vertices]
 
 center, radius = find_largest_inscribed_circle(polygon)
 plot_polygon_with_circle(polygon, center, radius)
+print(f"Кількість вершин: {len(polygon)}")
 print(f"Центр: {center}")
 print(f"Радіус: {radius}")
