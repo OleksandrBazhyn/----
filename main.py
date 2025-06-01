@@ -55,7 +55,7 @@ def find_largest_inscribed_circle(polygon):
     return center, radius
 
 def plot_polygon_with_circle(polygon, center, radius):
-    plt.figure(figsize=(7,7))
+    plt.figure(figsize=(12,9))
     pts = np.vstack([polygon, polygon[0]])
     plt.plot(pts[:,0], pts[:,1], 'k-', lw=2, label='Полігон')
     plt.plot(center[0], center[1], 'ro', label='Центр кола')
@@ -67,7 +67,7 @@ def plot_polygon_with_circle(polygon, center, radius):
     plt.show()
 
 # ==== ТЕСТ ====
-N = np.random.randint(6, 13)
+N = np.random.randint(0, 13)
 polygon = random_convex_polygon(N=N, size=10)
 
 hull = ConvexHull(polygon)
